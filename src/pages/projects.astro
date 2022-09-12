@@ -1,0 +1,34 @@
+---
+import Project from "../components/Project.astro";
+import BaseLayout from "../layouts/BaseLayout.astro"
+
+interface IProject {
+  name: string;
+  description: string;
+  url?: string;
+}
+
+import projects from "../projects.json";
+---
+
+<BaseLayout title="Projects">
+  <h1>Projects</h1>
+  
+<p>
+  A lot of my projects never see the light of day, but here are a
+  few that particularly like, some may still be private.
+</p>
+
+  {projects.map((project: IProject) => (
+    <Project {...project} />
+  )).reduce((acc, curr) => (
+    <>{acc}<hr>{curr}</>
+  ))}
+</BaseLayout>
+
+<style>
+  hr {
+    border: solid;
+    border-width: thin 0 0;
+  }
+</style>

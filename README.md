@@ -6,3 +6,5 @@ My website, written in Astro.
 ## Todo:
 - Rewrite all things that have to do with the blog.
 - Make styles a bit more organized.
+- Make TOC show progress
+- Revert blog system to what it was before

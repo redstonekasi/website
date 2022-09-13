@@ -1,0 +1,24 @@
+---
+import Project from "@components/Project.astro";
+import Base from "@layouts/Base.astro"
+import { projects } from "src/data";
+
+const meta = {
+  title: "Projects",
+  description: "A list of my projects",
+};
+---
+
+<Base meta={meta}>
+  <h1>Projects</h1>
+  <p>
+    A lot of my projects never see the light of day, but here are a
+    few that particularly like, some may still be private.
+  </p>
+
+  {projects.map((project) => (
+    <Project {...project} />
+  )).reduce((acc, curr) => (
+    <>{acc}<hr>{curr}</>
+  ))}
+</Base>

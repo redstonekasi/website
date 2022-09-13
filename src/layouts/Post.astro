@@ -1,0 +1,63 @@
+---
+import type { MarkdownLayoutProps } from "astro";
+import Base from "./Base.astro"
+
+export interface Frontmatter {
+  title: string;
+  description: string;
+  date: string;
+  draft?: boolean;
+}
+
+type Props = MarkdownLayoutProps<Frontmatter>;
+
+const {
+  frontmatter: {
+    title,
+    description,
+  },
+  headings,
+} = Astro.props;
+const meta = {
+  title,
+  description,
+};
+---
+
+<Base meta={meta}>
+  <slot />
+  <nav slot="sidebar">
+    <b>Page overview</b>
+    <ul>
+      {headings.map((heading) => (
+        <li class={`depth-${heading.depth}`}>
+          <a href={`#${heading.slug}`}>{heading.text}</a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+</Base>
+
+<style>
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  li a {
+    text-decoration: none;
+    color: var(--fg-deeper);
+  }
+
+  li {
+    border-inline-start: 1px solid var(--fg-deeper);
+    padding-left: .5rem;
+  }
+
+  .depth-2 {
+    margin-left: 1rem;
+  }
+  .depth-3 {
+    margin-left: 2rem;
+  }
+</style>

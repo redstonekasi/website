@@ -1,0 +1,11 @@
+---
+import { social } from "src/data";
+---
+
+<p>
+  {social.map(({ href, title }) => (
+    <a href={href}>{title}</a>
+  )).reduce((acc, curr) => (
+    <>{acc} | {curr}</>
+  ))}
+</p>

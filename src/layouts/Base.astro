@@ -1,0 +1,63 @@
+---
+import type { Props as BaseHeadProps } from "@components/BaseHead.astro";
+import BaseHead from "@components/BaseHead.astro";
+import Nav from "@components/Nav.astro";
+
+import "../global.css";
+
+export interface Props {
+  meta?: BaseHeadProps;
+}
+
+const { meta } = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <BaseHead {...meta} />
+  </head>
+  <body>
+    <div>
+      <Nav />
+      <main>
+        <slot />
+      </main>
+      <aside>
+        <slot name="sidebar" />
+      </aside>
+    </div>
+  </body>
+</html>
+
+<style>
+  div {
+    margin-top: 5rem;
+    display: grid;
+    grid-template-columns: 1fr minmax(60ch, 1fr) 1fr;
+    gap: 1rem;
+  }
+
+  main :global(h1:first-child) {
+    margin-top: 0;
+  }
+  
+  div :global(nav) {
+    margin-top: .5rem;
+  }
+
+  @media (max-width: 70ch) {
+    div {
+      grid-template-columns: initial;
+    }
+
+    div :global(nav) {
+      writing-mode: initial;
+      transform: initial;
+      display: initial;
+    }
+
+    div :global(a:not(:last-child)) {
+      margin-right: .5rem;
+    }
+  }
+</style>

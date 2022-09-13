@@ -1,0 +1,22 @@
+---
+import { navigation } from "src/data";
+---
+
+<nav>
+  {navigation.map(({ href, title }) => (
+    <a href={href}>{title}</a>
+  ))}
+</nav>
+
+<style>
+  nav {
+    writing-mode: vertical-lr;
+    transform: rotate(180deg);
+    display: flex;
+    flex-direction: row-reverse;
+  }
+
+  nav a:not(:last-child) {
+    margin-top: .5rem;
+  }
+</style>

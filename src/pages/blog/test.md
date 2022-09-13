@@ -1,6 +1,7 @@
 ---
 layout: "@layouts/PostLayout.astro"
 title: Hello world!
+description: This is a test
 date: "2022-09-13"
 ---
 

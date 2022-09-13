@@ -1,9 +1,60 @@
 ---
-import BaseLayout from "@layouts/BaseLayout.astro"
+import { parseISO, isBefore, intlFormat } from "date-fns";
+import BaseLayout from "@layouts/BaseLayout.astro";
+
+interface Frontmatter {
+  title: string;
+  description: string;
+  date: string;
+  draft?: boolean;
+}
+
+const posts = await Astro.glob<Frontmatter>("./*.md")
+  .then(posts => posts
+    .filter((post) => !post.frontmatter.draft)
+    .map(({ frontmatter, url }) => ({
+      title: frontmatter.title,
+      description: frontmatter.description,
+      date: parseISO(frontmatter.date),
+      href: url,
+    }))
+    .sort((a, b) => {
+      if (isBefore(a.date, b.date)) return 1;
+      if (isBefore(b.date, a.date)) return -1;
+      return 0;
+    }));
 ---
 
-<BaseLayout title="dasfhisoadf">
+<BaseLayout title="blog">
+  <h1>Blog</h1>
   <p>
     This page purely exists to fill the empty void that is the navbar.
   </p>
+  <h2>Posts</h2>
+  {posts.map((post) => (
+    <div>
+      <a href={post.href}>{post.title}</a>
+      {intlFormat(post.date, {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      }, {
+        locale: "en-US",
+      })}
+      <div>{post.description}</div>
+    </div>
+  )).reduce((acc, curr) => (
+    <>{acc} <hr> {curr}</>
+  ))}
 </BaseLayout>
+
+<style>
+  div {
+    display: grid;
+    grid-template-columns: 1fr auto;
+  }
+
+  a {
+    text-decoration: none;
+  }
+</style>

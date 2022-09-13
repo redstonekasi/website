@@ -1,6 +1,6 @@
 ---
 export interface Props {
-	title: string;
+  title: string;
 }
 
 const { title } = Astro.props;
@@ -8,89 +8,90 @@ const { title } = Astro.props;
 
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
 
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet"> 
-	</head>
-	<body>
-		<div class="grid">
-			<nav>
-				<a href="/">about</a>
-				<a href="/projects">projects</a>
-				<a href="/dasfhisoadf">dasfhisoadf</a>
-			</nav>
-			<main>
-				<slot />
-			</main>
-			<div>
-				<slot name="sidebar" />
-			</div>
-		</div>
-	</body>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet"> 
+  </head>
+  <body>
+    <div class="grid">
+      <nav>
+        <a href="/">about</a>
+        <a href="/projects">projects</a>
+        <a href="/dasfhisoadf">dasfhisoadf</a>
+      </nav>
+      <main>
+        <slot />
+      </main>
+      <div>
+        <slot name="sidebar" />
+      </div>
+    </div>
+  </body>
 </html>
 
 <style>
-	.grid {
-		display: grid;
-		gap: 1rem;
-		grid-template-columns: 1fr fit-content(60ch) 1fr;
-	}
+  .grid {
+    margin-top: 5rem;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr fit-content(60ch) 1fr;
+  }
 
-	nav {
-		writing-mode: vertical-lr;
-		transform: rotate(180deg);
-		display: flex;
-		flex-direction: row-reverse;
-	}
+  nav {
+    writing-mode: vertical-lr;
+    transform: rotate(180deg);
+    display: flex;
+    flex-direction: row-reverse;
+  }
 
-	nav a {
-		margin-bottom: .5rem;
-	}
+  nav a {
+    margin-bottom: .5rem;
+  }
 
-	@media (max-width: 70ch) {
-		div {
-			grid-template-columns: initial;
-		}
+  @media (max-width: 70ch) {
+    div {
+      grid-template-columns: initial;
+    }
 
-		nav {
-			writing-mode: initial;
-			transform: initial;
-			display: initial;
-		}
-	}
+    nav {
+      writing-mode: initial;
+      transform: initial;
+      display: initial;
+    }
+  }
 </style>
 
 <style is:global>
-	:root {
-		--bg: #050505;
-		--fg: #fff;
-		--fg-deep: #ddd;
-		--fg-deeper: #bbb;
-	}
+  :root {
+    --bg: #050505;
+    --fg: #fff;
+    --fg-deep: #ddd;
+    --fg-deeper: #bbb;
+  }
 
-	html {
-		background-color: #050505;
-		color: var(--fg-deeper);
-		font-family: "Inter", sans-serif;
-	}
+  html {
+    background-color: #050505;
+    color: var(--fg-deeper);
+    font-family: "Inter", sans-serif;
+  }
 
-	h1 {
-		color: var(--fg);
-		margin-top: 0;
-	}
+  h1 {
+    color: var(--fg);
+    margin-top: 0;
+  }
 
-	h2 {
-		color: var(--fg-deep);
-	}
+  h2 {
+    color: var(--fg-deep);
+  }
 
-	a, a:visited, a:hover, a:active, a:link {
-		color: var(--fg);
-	}
+  a, a:visited, a:hover, a:active, a:link {
+    color: var(--fg);
+  }
 </style>

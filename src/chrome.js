@@ -48,7 +48,7 @@ export const registerTransitions = () =>
     const dom = await getPageContent(destination);
     const transition = document.createDocumentTransition();
 
-    transition.start(() => {
+    await transition.start(() => {
       document.title = dom.title;
       document.body.innerHTML = dom.body.innerHTML;
     });

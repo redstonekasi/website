@@ -1,6 +1,7 @@
 import { defineConfig } from 'astro/config';
 
 import sitemap from "@astrojs/sitemap";
+import prefetch from "@astrojs/prefetch";
 
 // https://astro.build/config
 export default defineConfig({
@@ -10,5 +11,5 @@ export default defineConfig({
       file.data.astro.frontmatter.layout = "@layouts/Post.astro";
     }]
   },
-  integrations: [sitemap()]
+  integrations: [sitemap(), prefetch()],
 });

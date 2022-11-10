@@ -4,7 +4,7 @@ import { navigation } from "src/data";
 
 <nav>
   {navigation.map(({ href, title }) => (
-    <a href={href}>{title}</a>
+    <a rel="prefetch" href={href}>{title}</a>
   ))}
 </nav>
 

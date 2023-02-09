@@ -27,29 +27,40 @@ function isBackNavigation(navigateEvent) {
 }
 
 function onNavigation(callback) {
-  if (!document.createDocumentTransition) return;
+  if (!document.startViewTransition) return;
 
   navigation.addEventListener("navigate", (event) => {
     const destination = new URL(event.destination.url);
     if (location.origin !== destination.origin) return;
     if (location.href === destination.href) return event.preventDefault();
-    
+
+    const back = isBackNavigation(event);
+
     event.intercept({
       handler: () => callback({
         destination: destination.pathname,
         origin: location.pathname,
+        back,
       }),
     });
   });
 }
 
 export const registerTransitions = () =>
-  onNavigation(async ({ destination }) => {
-    const dom = await getPageContent(destination);
-    const transition = document.createDocumentTransition();
 
-    await transition.start(() => {
-      document.title = dom.title;
-      document.body.innerHTML = dom.body.innerHTML;
+  onNavigation(async ({ destination, back }) => {
+    const dom = await getPageContent(destination);
+
+    if (back) document.documentElement.classList.add('back-transition');
+
+    const trans = document.startViewTransition(() => {
+      document.head.innerHTML = dom.head.innerHTML;
+      document.body.querySelector("main").innerHTML = dom.body.querySelector("main").innerHTML;
     });
+
+    try {
+      await trans.finished;
+    } finally {
+      document.documentElement.classList.remove('back-transition');
+    }
   });

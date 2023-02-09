@@ -16,7 +16,17 @@ import { navigation } from "src/data";
     flex-direction: row-reverse;
   }
 
+  nav a {
+    width: fit-content;
+  }
+
   nav a:not(:last-child) {
     margin-top: .5rem;
+  }
+
+  @media (max-width: 70ch) {
+    nav a:not(:last-child) {
+      margin-right: .5rem;
+    }
   }
 </style>

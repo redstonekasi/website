@@ -40,21 +40,36 @@ hr {
   to { opacity: 0; }
 }
 
-@keyframes slide-to-top {
-  to { transform: translateY(-100px); }
-}
-
 @keyframes slide-from-bottom {
-  to { transform: translateY(0); }
+  from { transform: translateY(30px); }
 }
 
-::page-transition-outgoing-image(root) {
+@keyframes slide-to-top {
+  to { transform: translateY(-30px); }
+}
+
+@keyframes slide-to-bottom {
+  to { transform: translateY(30px); }
+}
+
+@keyframes slide-from-top {
+  from { transform: translateY(-30px); }
+}
+
+::view-transition-old(root) {
   animation: 90ms cubic-bezier(0.4, 0, 1, 1) both fade-out,
     300ms cubic-bezier(0.4, 0, 0.2, 1) both slide-to-top;
 }
 
-::page-transition-incoming-image(root) {
-  transform: translateY(100px);
-  animation: 210ms cubic-bezier(0.4, 0, 1, 1) 90ms both fade-in,
+::view-transition-new(root) {
+  animation: 210ms cubic-bezier(0, 0, 0.2, 1) 90ms both fade-in,
     300ms cubic-bezier(0.4, 0, 0.2, 1) both slide-from-bottom;
+}
+
+.back-transition::view-transition-old(root) {
+  animation-name: fade-out, slide-to-bottom;
+}
+
+.back-transition::view-transition-new(root) {
+  animation-name: fade-in, slide-from-top;
 }

@@ -26,7 +26,7 @@ h3, h4, h5, h6 {
 a {
   color: var(--fg);
 }
-
+/* 
 hr {
   border: solid;
   border-width: thin 0 0;
@@ -68,7 +68,7 @@ hr {
 
 .back-transition::view-transition-old(root) {
   animation-name: fade-out, slide-to-bottom;
-}
+} */
 
 .back-transition::view-transition-new(root) {
   animation-name: fade-in, slide-from-top;

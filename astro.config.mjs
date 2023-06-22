@@ -5,11 +5,14 @@ import prefetch from "@astrojs/prefetch";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://k6.tf",
-  markdown: {
-    remarkPlugins: [() => (tree, file) => {
-      file.data.astro.frontmatter.layout = "@layouts/Post.astro";
-    }]
+  site: "https://k6.tf/",
+  build: {
+    assets: "_assets"
   },
-  integrations: [sitemap(), prefetch()],
+  // markdown: {
+  //   remarkPlugins: [() => (tree, file) => {
+  //     file.data.astro.frontmatter.layout = "@layouts/Post.astro";
+  //   }]
+  // },
+// integrations: [sitemap(), prefetch()],
 });

@@ -1,1 +1,0 @@
-sitemap: https://k6.tf/sitemap-index.xml
